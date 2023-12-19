@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public abstract class Option
 {
@@ -52,5 +54,17 @@ public class Command : Label
     public override void Select()
     {
         _action();
+    }
+}
+
+public class SelectAssetCommand : Command
+{
+    public SelectAssetCommand(Object obj) : this(obj, "Select asset")
+    {
+    }
+
+    public SelectAssetCommand(Object obj, string text) : base(text, () => ProjectWindowUtil.ShowCreatedAsset(obj))
+    {
+        
     }
 }
